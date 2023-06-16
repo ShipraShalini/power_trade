@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: 'v0.0.262'
+    hooks:
+      - id: ruff
+        args: [ --fix, --exit-non-zero-on-fix ]
+
+  - repo: local
+    hooks:
+      - id: actionlint
+        name: Lint GitHub Actions workflow files
+        entry: actionlint
+        language: golang
+        language_version: "1.19"
+        additional_dependencies: [ github.com/rhysd/actionlint/cmd/actionlint@v1.6.23 ]
+        types: [ "yaml" ]
+        files: "^.github/workflows/"
