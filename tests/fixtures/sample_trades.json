@@ -1,0 +1,132 @@
+[
+  {
+    "id": "t_123",
+    "price": 120,
+    "quantity": 12,
+    "direction": "sell",
+    "delivery_day": "2023-06-14",
+    "delivery_hour": 14,
+    "trader_id": "trader_1",
+    "execution_time": "2023-06-14T11:12:35Z"
+  },
+  {
+    "id": "t_456",
+    "price": 78,
+    "quantity": 57,
+    "direction": "buy",
+    "delivery_day": "2023-06-14",
+    "delivery_hour": 9,
+    "trader_id": "trader_2",
+    "execution_time": "2023-06-14T07:45:12Z"
+  },
+  {
+    "id": "t_337",
+    "price": 95,
+    "quantity": 51,
+    "direction": "sell",
+    "delivery_day": "2023-06-13",
+    "delivery_hour": 9,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-13T16:37:40Z"
+  },
+  {
+    "id": "t_789",
+    "price": 34,
+    "quantity": 18,
+    "direction": "sell",
+    "delivery_day": "2023-06-13",
+    "delivery_hour": 20,
+    "trader_id": "trader_2",
+    "execution_time": "2023-06-13T16:23:38Z"
+  },
+  {
+    "id": "t_160",
+    "price": 679,
+    "quantity": 75,
+    "direction": "buy",
+    "delivery_day": "2023-06-13",
+    "delivery_hour": 13,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-13T12:32:24Z"
+  },
+  {
+    "id": "t_320",
+    "price": 102,
+    "quantity": 734,
+    "direction": "sell",
+    "delivery_day": "2023-06-13",
+    "delivery_hour": 8,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-13T11:17:05Z"
+  },
+  {
+    "id": "t_353",
+    "price": 825,
+    "quantity": 23,
+    "direction": "buy",
+    "delivery_day": "2023-06-13",
+    "delivery_hour": 8,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-13T06:22:47Z"
+  },
+  {
+    "id": "t_962",
+    "price": 32,
+    "quantity": 307,
+    "direction": "sell",
+    "delivery_day": "2023-06-13",
+    "delivery_hour": 7,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-13T04:17:59Z"
+  },
+  {
+    "id": "t_468",
+    "price": 108,
+    "quantity": 79,
+    "direction": "buy",
+    "delivery_day": "2023-06-13",
+    "delivery_hour": 8,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-13T02:03:11Z"
+  },
+  {
+    "id": "t_188",
+    "price": 383,
+    "quantity": 324,
+    "direction": "buy",
+    "delivery_day": "2023-06-11",
+    "delivery_hour": 13,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-11T22:34:49Z"
+  },
+  {
+    "id": "t_357",
+    "price": 86,
+    "quantity": 579,
+    "direction": "sell",
+    "delivery_day": "2023-06-11",
+    "delivery_hour": 7,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-11T18:54:53Z"
+  },
+  {
+    "id": "t_585",
+    "price": 2605,
+    "quantity": 322,
+    "direction": "buy",
+    "delivery_day": "2023-06-11",
+    "delivery_hour": 8,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-11T08:18:07Z"
+  },
+  {
+    "id": "t_215",
+    "price": 2626,
+    "quantity": 135,
+    "direction": "sell",
+    "delivery_day": "2023-06-11",
+    "delivery_hour": 7,
+    "trader_id": "trader_23",
+    "execution_time": "2023-06-11T01:34:47Z"
+  }
+]
