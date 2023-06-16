@@ -1,0 +1,31 @@
+name: Batch Upload Trades
+
+on:
+  workflow_dispatch:
+#  schedule:
+#    - cron: '5 0 * * *'  # Everyday at 00:05 UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Setup python with caching
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'poetry'
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Batch Upload Trades
+        run: python batch_upload_trades.py
+        env:
+          CSV_DIR: ''
+          BASE_URL: ''
