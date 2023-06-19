@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  backend:
+    tty: true
+    stdin_open: true
+    restart: always
+    build:
+      context: .
+    volumes:
+      - ./:/app/
+#    command: uvicorn main:app --reload
+    ports:
+      - "8000:8000"
+    environment:
+      - SENTRY_DSN=${SENTRY_DSN}
+      - SECRET_KEY=${SECRET_KEY}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - DB_URL=${DB_URL}
+
+  frontend:
+    image: nginx:alpine
+    volumes:
+      - ./dashboard:/usr/share/nginx/html
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend

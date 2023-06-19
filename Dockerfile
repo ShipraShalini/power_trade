@@ -14,4 +14,4 @@ RUN poetry install
 COPY power/ .
 
 # Start Gunicorn with Uvicorn
-CMD ["uvicorn", "main:app"]
+CMD [ "poetry", "run", "uvicorn", "main:app", "--reload", "--workers", "1",  "--host", "0.0.0.0", "--port", "8000"]

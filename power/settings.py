@@ -8,7 +8,7 @@ class Settings:
     SECRET_KEY: str = os.getenv("SECRET_KEY")
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", ENV_LOCAL)
     SENTRY_DSN: str = os.getenv("SENTRY_DSN")
-    DB_URL: str = os.getenv("DB_URL", "sqlite://db.sqlite3")
+    DB_URL: str = os.getenv("DB_URL") or "sqlite://db.sqlite3"
 
 
 settings = Settings()

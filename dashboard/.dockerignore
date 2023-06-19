@@ -1,7 +1,3 @@
-# code
-dashboard/
-tests/
-
 # Docker stuff
 .dockerignore
 Dockerfile
