@@ -29,9 +29,9 @@ def pydantic_validation_exception_handler(request: Request, exception: RequestVa
                 msg = f"Field `{field_string}`, {msg}"
 
             field_errors.append(msg)
-        return JSONResponse({"status_code": 400, "message": field_errors})
+        return JSONResponse({"status_code": 400, "message": field_errors}, status_code=400)
     except TypeError:
-        return JSONResponse({"status_code": 400, "message": "Invalid JSON"})
+        return JSONResponse({"status_code": 400, "message": "Invalid JSON"}, status_code=400)
 
 
 EXCEPTION_HANDLERS_DICT = {

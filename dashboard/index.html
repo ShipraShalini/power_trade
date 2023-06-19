@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Trader Report</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]>
+    <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+</head>
+
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">PnL Report</h1>
+
+            <h2 class="sub-header" id="title">Generate Report</h2>
+            <br>
+            <div class="table-responsive">
+                <form id="form">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td><label for="trader_id">Trader ID:</label></td>
+                            <td><input name="trader_id" type="text" id="trader_id" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="delivery_day">Delivery Day (Optional):</label></td>
+                            <td><input name="delivery_day" type="date" id="delivery_day"></td>
+                        </tr>
+                        <tr>
+                            <td><button type="submit" class="btn btn-outline-info">Generate Report</button></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+
+                <div class="table-responsive" id="report">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Hour</th>
+                            <th>Number of Trades</th>
+                            <th>Total BUY [MW]</th>
+                            <th>Total Sell [MW]</th>
+                            <th>PnL [Eur]</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script>
+    const form = document.getElementById("form")
+
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData)
+        fetch("http://localhost:8000/trades/report", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(payload)
+        })
+            .then(res => res.json())
+            .then(data => {
+                let report = ""
+                data.records.forEach(record => {
+                    report += `<tr>
+                        <td>${record.hour} </td>
+                        <td>${record.number_of_trades}</td>
+                        <td>${record.total_buy}</td>
+                        <td>${record.total_sell}</td>
+                        <td>${record.pnl}</td>
+                    </tr>`
+                })
+
+                document.getElementById('form').style.display = 'none';
+                document.getElementById('report').style.display = 'block';
+                document.getElementById("tbody").innerHTML = report
+                document.getElementById("title").innerText = "Trader ID: " + data.trader_id + "\n\n Delivery Day: " + data.delivery_day
+            })
+            .catch(err => console.log(err))
+    })
+
+</script>
+</body>
+</html>

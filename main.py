@@ -2,6 +2,7 @@ import sentry_sdk
 from fastapi import FastAPI
 from fastapi.exception_handlers import http_exception_handler
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
+from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.errors import ServerErrorMiddleware
 from starlette.responses import JSONResponse
 from tortoise.contrib.fastapi import register_tortoise
@@ -26,6 +27,15 @@ app.add_middleware(
 
 sentry_sdk.init(settings.SENTRY_DSN, environment=settings.ENVIRONMENT, attach_stacktrace=True)
 app.add_middleware(SentryAsgiMiddleware)
+
+# Set all CORS enabled origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=".*localhost:\\d+",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 register_tortoise(
     app,

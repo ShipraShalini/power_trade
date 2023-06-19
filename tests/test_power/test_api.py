@@ -35,7 +35,11 @@ from power.models import Trade
 )
 @pytest.mark.asyncio
 async def test_get_trades(
-    client: AsyncClient, fixtures_path: Path, sample_trades: list[Trade], query_params: dict, expected_trade_ids: list
+    client: AsyncClient,
+    fixtures_path: Path,
+    sample_trades: list[Trade],
+    query_params: dict,
+    expected_trade_ids: list,
 ):
     # Arrange
     sample_trades = json.loads((fixtures_path / "sample_trades.json").read_text())

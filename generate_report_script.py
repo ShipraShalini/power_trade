@@ -26,7 +26,7 @@ async def main():
         args = parse_args(sys.argv[1:])
         await Tortoise.init(db_url=settings.DB_URL, modules=DB_MODULES)
         report = await generate_trade_report(args.trader_id, args.delivery_day)
-        print_report(report)
+        print_report(report["records"])
     except Exception as e:
         capture_exception(e)
         raise

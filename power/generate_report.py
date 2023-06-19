@@ -6,9 +6,8 @@ from power.models import Trade, TradeDirection
 
 
 async def generate_trade_report(trader_id: str, delivery_day: Optional[date] = None):
-    trades = await Trade.filter(trader_id=trader_id, delivery_day=delivery_day or date.today()).order_by(
-        "delivery_hour"
-    )
+    delivery_day = delivery_day or date.today()
+    trades = await Trade.filter(trader_id=trader_id, delivery_day=delivery_day).order_by("delivery_hour")
     trades_by_hour = defaultdict(list)
 
     for trade in trades:
@@ -28,7 +27,7 @@ async def generate_trade_report(trader_id: str, delivery_day: Optional[date] = N
                 pnl += trade.quantity * trade.price
         report.append(
             {
-                "hour": hour,
+                "hour": f"{hour} - {hour + 1}",
                 "number_of_trades": len(trades),
                 "total_buy": total_buy,
                 "total_sell": total_sell,
@@ -36,4 +35,4 @@ async def generate_trade_report(trader_id: str, delivery_day: Optional[date] = N
             }
         )
 
-    return report
+    return {"trader_id": trader_id, "delivery_day": delivery_day, "records": report}

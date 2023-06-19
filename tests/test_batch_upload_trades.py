@@ -14,11 +14,18 @@ from batch_upload_trades import add_new_trades, main
 @freeze_time("2023-06-15")
 @patch.object(requests, "get")
 @patch.object(requests, "post")
-async def test_main(patched_requests_post: MagicMock, patched_requests_get: MagicMock, fixtures_path: Path):
+async def test_main(
+    patched_requests_post: MagicMock,
+    patched_requests_get: MagicMock,
+    fixtures_path: Path,
+):
     # Arrange
     TRADE_URL = "http://localhost:8000/trades"
     patched_requests_get.return_value.status_code = 200
-    patched_requests_get.return_value.json.return_value = [{"id": "t_123"}, {"id": "t_456"}]
+    patched_requests_get.return_value.json.return_value = [
+        {"id": "t_123"},
+        {"id": "t_456"},
+    ]
 
     expected_calls = [
         call(
@@ -33,6 +40,7 @@ async def test_main(patched_requests_post: MagicMock, patched_requests_get: Magi
                 "trader_id": "trader_1",
                 "execution_time": "2023-06-14T11:12:35Z",
             },
+            timeout=30,
         ),
         call(
             TRADE_URL,
@@ -46,6 +54,7 @@ async def test_main(patched_requests_post: MagicMock, patched_requests_get: Magi
                 "trader_id": "trader_2",
                 "execution_time": "2023-06-14T07:45:12Z",
             },
+            timeout=30,
         ),
         call(
             TRADE_URL,
@@ -59,6 +68,7 @@ async def test_main(patched_requests_post: MagicMock, patched_requests_get: Magi
                 "trader_id": "trader_2",
                 "execution_time": "2023-06-14T16:23:38Z",
             },
+            timeout=30,
         ),
     ]
 
@@ -67,7 +77,7 @@ async def test_main(patched_requests_post: MagicMock, patched_requests_get: Magi
         main()
 
     # Assert
-    patched_requests_get.assert_called_once_with(TRADE_URL, params={"delivery_day": "2023-06-14"})
+    patched_requests_get.assert_called_once_with(TRADE_URL, params={"delivery_day": "2023-06-14"}, timeout=30)
 
     patched_requests_post.assert_has_calls(expected_calls, any_order=True)
 
