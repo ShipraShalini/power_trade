@@ -8,11 +8,11 @@ from power.models import TradeDirection
 
 class Trade_Pydantic(BaseModel):
     id: str
-    price: StrictInt = Field(min=1)
-    quantity: StrictInt = Field(min=1)
+    price: int = Field(min=1)
+    quantity: int = Field(min=1)
     direction: TradeDirection
     delivery_day: date
-    delivery_hour: StrictInt = Field(max=23)
+    delivery_hour: int = Field(max=23)
     trader_id: str
     execution_time: datetime
     created_at: Optional[datetime] = Field(exclude=True)

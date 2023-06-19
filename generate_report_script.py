@@ -18,6 +18,8 @@ def parse_args(args):
 
 
 def print_report(report: list[dict]):
+    if not report:
+        print("No trades found.")
     print(tabulate(report, headers="keys"))
 
 
