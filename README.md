@@ -1,3 +1,13 @@
+#### Overview
+A modular trading data management system designed to store, process, and visualize trade activity. This project includes:
+
+- A RESTful API for storing and querying trade data with authentication.
+- A CSV batch importer to automate trade data ingestion from daily exchange reports.
+- A PnL computation workflow that generates trade performance reports in the terminal.
+- A web dashboard for traders to visualize their daily trading reports interactively.
+- GitHub Actions for automating the trade import workflow by calling the API to input trade data.
+
+
 #### System Requirements
 `Python >= 3.11`
 
